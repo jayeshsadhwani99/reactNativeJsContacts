@@ -7,7 +7,9 @@ import Register from '../screens/Register';
 const AuthNavigator = () => {
   const AuthStack = createStackNavigator();
   return (
-    <AuthStack.Navigator initialRouteName="Login">
+    <AuthStack.Navigator
+      initialRouteName="Login"
+      screenOptions={{headerShown: false}}>
       <AuthStack.Screen name={LOGIN} component={Login} />
       <AuthStack.Screen name={REGISTER} component={Register} />
     </AuthStack.Navigator>
