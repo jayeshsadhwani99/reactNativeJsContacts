@@ -3,11 +3,11 @@ import {Image, Text, TouchableOpacity, View} from 'react-native';
 import Container from '../../components/common/Container';
 import CustomButton from '../../components/common/CustomButton';
 import Input from '../../components/common/Input';
-import {REGISTER} from '../../constants/routeNames';
+import {LOGIN} from '../../constants/routeNames';
 import styles from './styles';
 import {useNavigation} from '@react-navigation/native';
 
-const LoginComponent = () => {
+const RegisterComponent = () => {
   const {navigate} = useNavigation();
   return (
     <Container>
@@ -20,10 +20,16 @@ const LoginComponent = () => {
 
       <View>
         <Text style={styles.title}>Welcome to JSContacts</Text>
-        <Text style={styles.subtitle}>Please Login Here</Text>
+        <Text style={styles.subtitle}>Create a Free Account</Text>
 
         <View style={styles.form}>
           <Input label="Username" placeholder="Enter Username" />
+
+          <Input label="First Name" placeholder="Enter Fisrt Name" />
+
+          <Input label="Last Name" placeholder="Enter Last Name" />
+
+          <Input label="Email" placeholder="Enter Email" />
 
           <Input
             label="Password"
@@ -36,12 +42,12 @@ const LoginComponent = () => {
           <CustomButton primary title="Submit" />
 
           <View style={styles.createSection}>
-            <Text style={styles.infoText}>Need a new Account?</Text>
+            <Text style={styles.infoText}>Already have an Account?</Text>
             <TouchableOpacity
               onPress={() => {
-                navigate(REGISTER);
+                navigate(LOGIN);
               }}>
-              <Text style={styles.linkBtn}>Register</Text>
+              <Text style={styles.linkBtn}>Login</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -50,4 +56,4 @@ const LoginComponent = () => {
   );
 };
 
-export default LoginComponent;
+export default RegisterComponent;
