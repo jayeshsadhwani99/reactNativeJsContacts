@@ -2,11 +2,18 @@ import React from 'react';
 import {useState} from 'react';
 import RegisterComponent from '../../components/Register';
 import envs from '../../config/env';
+import axiosInstance from '../../helpers/axiosInterceptor';
 
 const Register = () => {
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
   const {BACKEND_URL} = envs;
+
+  React.useEffect(() => {
+    axiosInstance.post('/contacts').catch(error => {
+      console.error(error);
+    });
+  }, []);
 
   console.log(BACKEND_URL);
 
