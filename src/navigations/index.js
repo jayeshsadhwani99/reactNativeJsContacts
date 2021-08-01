@@ -29,7 +29,7 @@ const AppNavContainer = () => {
 
   React.useEffect(() => {
     getUser();
-  }, []);
+  }, [isLoggedIn]);
 
   const {
     authState: {isLoggedIn},
