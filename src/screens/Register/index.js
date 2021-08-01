@@ -1,21 +1,37 @@
+import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect} from '@react-navigation/native';
 import React from 'react';
+import {useContext} from 'react';
 import {useState} from 'react';
 import RegisterComponent from '../../components/Register';
-import envs from '../../config/env';
-import axiosInstance from '../../helpers/axiosInterceptor';
+import {LOGIN} from '../../constants/routeNames';
+import register, {clearAuthState} from '../../context/actions/auth/register';
+import {GlobalContext} from '../../context/Provider';
 
 const Register = () => {
   const [form, setForm] = useState({});
+  const {navigate} = useNavigation();
   const [errors, setErrors] = useState({});
-  const {BACKEND_URL} = envs;
+  const {
+    authDispatch,
+    authState: {error, loading, data},
+  } = useContext(GlobalContext);
 
   React.useEffect(() => {
-    axiosInstance.post('/contacts').catch(error => {
-      console.error(error);
-    });
-  }, []);
+    if (data || error) {
+      navigate(LOGIN);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, error]);
 
-  console.log(BACKEND_URL);
+  useFocusEffect(
+    React.useCallback(() => {
+      if (data || error) {
+        clearAuthState()(authDispatch);
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data, error]),
+  );
 
   const onChange = ({name, value}) => {
     setForm({...form, [name]: value});
@@ -48,7 +64,6 @@ const Register = () => {
 
   const onSubmit = () => {
     // Validations
-    console.log(form);
     if (!form.username) {
       setErrors(prev => {
         return {...prev, username: 'Please provide a Username'};
@@ -74,6 +89,14 @@ const Register = () => {
         return {...prev, password: 'Please provide a Password'};
       });
     }
+
+    if (
+      Object.values(form).length === 5 &&
+      Object.values(form).every(item => item.trim().length > 0) &&
+      Object.values(errors).every(item => !item)
+    ) {
+      register(form)(authDispatch);
+    }
   };
 
   return (
@@ -82,6 +105,8 @@ const Register = () => {
       onChange={onChange}
       form={form}
       errors={errors}
+      error={error}
+      loading={loading}
     />
   );
 };
