@@ -10,6 +10,7 @@ import Message from '../common/Message';
 
 const RegisterComponent = ({onSubmit, onChange, errors, error, loading}) => {
   const {navigate} = useNavigation();
+  const [isSecureEntry, setIsSecureEntry] = React.useState(true);
   return (
     <Container>
       <Image
@@ -66,8 +67,12 @@ const RegisterComponent = ({onSubmit, onChange, errors, error, loading}) => {
 
           <Input
             label="Password"
-            icon={<Text>HIDE</Text>}
-            secureTextEntry={true}
+            icon={
+              <TouchableOpacity onPress={() => setIsSecureEntry(prev => !prev)}>
+                <Text>{isSecureEntry ? 'SHOW' : 'HIDE'}</Text>
+              </TouchableOpacity>
+            }
+            secureTextEntry={isSecureEntry}
             iconPosition="right"
             placeholder="Enter Password"
             onChangeText={value => {
