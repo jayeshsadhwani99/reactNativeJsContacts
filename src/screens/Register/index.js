@@ -26,9 +26,11 @@ const Register = () => {
 
   useFocusEffect(
     React.useCallback(() => {
-      if (data || error) {
-        clearAuthState()(authDispatch);
-      }
+      return () => {
+        if (data || error) {
+          clearAuthState()(authDispatch);
+        }
+      };
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data, error]),
   );

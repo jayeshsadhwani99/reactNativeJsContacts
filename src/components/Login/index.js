@@ -8,7 +8,7 @@ import styles from './styles';
 import {useNavigation} from '@react-navigation/native';
 import Message from '../common/Message';
 
-const LoginComponent = () => {
+const LoginComponent = ({error, onChange, onSubmit, loading}) => {
   const {navigate} = useNavigation();
   return (
     <Container>
@@ -23,18 +23,19 @@ const LoginComponent = () => {
         <Text style={styles.title}>Welcome to JSContacts</Text>
         <Text style={styles.subtitle}>Please Login Here</Text>
 
-        <Message
-          retry
-          retryFn={() => {
-            console.log('Hello World');
-          }}
-          danger
-          onDismiss={() => {}}
-          message="Invalid credentials"
-        />
-
         <View style={styles.form}>
-          <Input label="Username" placeholder="Enter Username" />
+          {error && !error.error && (
+            <Message danger onDismiss message="Invalid credentials" />
+          )}
+          {error?.error && <Message danger onDismiss message={error?.error} />}
+
+          <Input
+            label="Username"
+            placeholder="Enter Username"
+            onChangeText={value => {
+              onChange({name: 'username', value});
+            }}
+          />
 
           <Input
             label="Password"
@@ -42,9 +43,18 @@ const LoginComponent = () => {
             secureTextEntry={true}
             iconPosition="right"
             placeholder="Enter Password"
+            onChangeText={value => {
+              onChange({name: 'password', value});
+            }}
           />
 
-          <CustomButton primary title="Submit" />
+          <CustomButton
+            disabled={loading}
+            loading={loading}
+            onPress={onSubmit}
+            primary
+            title="Submit"
+          />
 
           <View style={styles.createSection}>
             <Text style={styles.infoText}>Need a new Account?</Text>
