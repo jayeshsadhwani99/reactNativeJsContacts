@@ -1,3 +1,4 @@
+import {useRoute} from '@react-navigation/native';
 import React from 'react';
 import {useContext} from 'react';
 import {useState} from 'react';
@@ -7,11 +8,20 @@ import {GlobalContext} from '../../context/Provider';
 
 const Login = () => {
   const [form, setForm] = useState({});
+  const [justSignedUp, setJustSignedUp] = useState(false);
+  const {params} = useRoute();
+
+  React.useEffect(() => {
+    if (params?.data) {
+      justSignedUp(true);
+      setForm({...form, username: params.data.username});
+    }
+  }, [params]);
+
   const {
     authDispatch,
     authState: {error, loading},
   } = useContext(GlobalContext);
-  const [text, onChangeText] = React.useState('');
 
   const onSubmit = () => {
     if (form.username && form.password) {
@@ -20,6 +30,7 @@ const Login = () => {
   };
 
   const onChange = ({name, value}) => {
+    setJustSignedUp(false);
     setForm({...form, [name]: value});
   };
 
@@ -30,6 +41,7 @@ const Login = () => {
       form={form}
       error={error}
       loading={loading}
+      justSignedUp={justSignedUp}
     />
   );
 };
