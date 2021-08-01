@@ -5,7 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import DrawerNavigator from './DrawerNavigator';
 import {GlobalContext} from '../context/Provider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {ActivityIndicatorBase} from 'react-native';
+import {ActivityIndicator} from 'react-native';
 
 const AppNavContainer = () => {
   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
@@ -46,7 +46,7 @@ const AppNavContainer = () => {
           )}
         </NavigationContainer>
       ) : (
-        <ActivityIndicatorBase />
+        <ActivityIndicator />
       )}
     </>
   );
