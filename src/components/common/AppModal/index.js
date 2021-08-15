@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, Modal, TouchableOpacity, ScrollView} from 'react-native';
-import {Icon} from 'react-native-vector-icons/Icon';
+import Icon from '../Icon';
 import styles from './styles';
 
 const AppModal = ({
