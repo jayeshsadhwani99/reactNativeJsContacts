@@ -13,7 +13,7 @@ const Login = () => {
 
   React.useEffect(() => {
     if (params?.data) {
-      justSignedUp(true);
+      setJustSignedUp(true);
       setForm({...form, username: params.data.username});
     }
   }, [params]);
