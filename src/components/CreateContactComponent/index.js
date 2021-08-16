@@ -1,11 +1,12 @@
 import React from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, Switch} from 'react-native';
 import styles from './styles';
 import Container from '../common/Container';
 import Input from '../common/Input';
 import CustomButton from '../common/CustomButton';
 import CountryPicker from 'react-native-country-picker-modal';
-import {DEFAULT_IMAGE_URI} from '../../constants';
+import {DEFAULT_IMAGE_URI} from '../../constants/general';
+import colors from '../../assets/theme/colors';
 
 const CreateContactComponent = ({
   loading,
@@ -14,6 +15,7 @@ const CreateContactComponent = ({
   setForm,
   form,
   onSubmit,
+  toggleValueChange,
 }) => {
   console.log('error>>>>', error);
   return (
@@ -70,6 +72,23 @@ const CreateContactComponent = ({
           placeholder="Enter Phone Number"
           error={error?.phone_number?.[0]}
         />
+
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            paddingVertical: 10,
+            alignItems: 'center',
+          }}>
+          <Text style={{fontSize: 17}}>Add to Favorites</Text>
+          <Switch
+            trackColor={{false: 'blue', true: colors.primary}}
+            thumbColor="#FFFFFF"
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={toggleValueChange}
+            value={form.isFavorite}
+          />
+        </View>
 
         <CustomButton
           loading={loading}

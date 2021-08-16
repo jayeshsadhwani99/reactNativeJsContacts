@@ -8,7 +8,7 @@ StyleSheet.create({
   },
   imageView: {
     width: 150,
-    hieght: 150,
+    height: 150,
     borderRadius: 100,
     alignSelf: 'center',
   },

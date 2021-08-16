@@ -25,11 +25,16 @@ const CreateContact = () => {
     });
   };
 
+  const toggleValueChange = () => {
+    setForm({...form, isFavorite: !form.isFavorite});
+  };
+
   return (
     <CreateContactComponent
       onSubmit={onSubmit}
       setForm={setForm}
       onChangeText={onChangeText}
+      toggleValueChange={toggleValueChange}
       form={form}
       loading={loading}
       error={error}
