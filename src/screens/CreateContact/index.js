@@ -12,6 +12,7 @@ const CreateContact = () => {
       createContact: {loading, error},
     },
   } = useContext(GlobalContext);
+  const sheetRef = React.useRef(null);
   const [form, setForm] = React.useState({});
   const {navigate} = useNavigation();
 
@@ -29,6 +30,18 @@ const CreateContact = () => {
     setForm({...form, isFavorite: !form.isFavorite});
   };
 
+  const closeSheet = () => {
+    if (sheetRef.current) {
+      sheetRef.current.close();
+    }
+  };
+
+  const openSheet = () => {
+    if (sheetRef.current) {
+      sheetRef.current.open();
+    }
+  };
+
   return (
     <CreateContactComponent
       onSubmit={onSubmit}
@@ -38,6 +51,9 @@ const CreateContact = () => {
       form={form}
       loading={loading}
       error={error}
+      sheetRef={sheetRef}
+      closeSheet={closeSheet}
+      openSheet={openSheet}
     />
   );
 };
