@@ -15,6 +15,7 @@ const CreateContact = () => {
   const sheetRef = React.useRef(null);
   const [form, setForm] = React.useState({});
   const {navigate} = useNavigation();
+  const [localFile, setLocalFile] = React.useState(null);
 
   const onChangeText = ({name, value}) => {
     setForm({...form, [name]: value});
@@ -42,6 +43,12 @@ const CreateContact = () => {
     }
   };
 
+  const onFileSelected = image => {
+    closeSheet();
+    setLocalFile(image);
+    console.log(image);
+  };
+
   return (
     <CreateContactComponent
       onSubmit={onSubmit}
@@ -54,6 +61,8 @@ const CreateContact = () => {
       sheetRef={sheetRef}
       closeSheet={closeSheet}
       openSheet={openSheet}
+      onFileSelected={onFileSelected}
+      localFile={localFile}
     />
   );
 };

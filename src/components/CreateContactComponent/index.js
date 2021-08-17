@@ -19,16 +19,16 @@ const CreateContactComponent = ({
   toggleValueChange,
   sheetRef,
   openSheet,
-  closeSheet,
+  onFileSelected,
+  localFile,
 }) => {
-  console.log('error>>>>', error);
   return (
     <View style={styles.container}>
       <Container>
         <Image
           aidth={150}
           height={150}
-          source={{uri: DEFAULT_IMAGE_URI}}
+          source={{uri: localFile?.path || DEFAULT_IMAGE_URI}}
           style={styles.imageView}
         />
         <TouchableOpacity onPress={openSheet}>
@@ -105,7 +105,7 @@ const CreateContactComponent = ({
         />
       </Container>
 
-      <ImagePicker ref={sheetRef} />
+      <ImagePicker onFileSelected={onFileSelected} ref={sheetRef} />
     </View>
   );
 };
