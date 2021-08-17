@@ -1,4 +1,4 @@
-package com.jscontacts;
+package com.jayesh.jscontacts;
 
 import com.facebook.react.ReactActivity;
 
