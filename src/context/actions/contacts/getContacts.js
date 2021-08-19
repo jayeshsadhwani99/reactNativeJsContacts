@@ -3,7 +3,7 @@ import {
   GET_CONTACTS_LOADING,
   GET_CONTACTS_SUCCESS,
 } from '../../../constants/actionTypes';
-import axios from '../../../helpers/axiosIntstance';
+import axios from '../../../helpers/axiosInstance';
 
 export default () => dispatch => {
   dispatch({
@@ -11,7 +11,7 @@ export default () => dispatch => {
   });
 
   axios
-    .get('/contacts')
+    .get('/contacts/')
     .then(res => {
       dispatch({
         type: GET_CONTACTS_SUCCESS,
@@ -23,7 +23,7 @@ export default () => dispatch => {
         type: GET_CONTACTS_FAIL,
         payload: err.response
           ? err.response.data
-          : {error: 'Something Went Wrong.'},
+          : {error: 'Something went wrong, try again'},
       });
     });
 };
