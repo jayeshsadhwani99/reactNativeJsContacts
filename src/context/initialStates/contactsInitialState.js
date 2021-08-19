@@ -9,6 +9,7 @@ export default {
     error: null,
     loading: false,
   },
+
   deleteContact: {
     data: {},
     error: null,
