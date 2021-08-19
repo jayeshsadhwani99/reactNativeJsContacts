@@ -3,7 +3,7 @@ import {
   DELETE_CONTACT_LOADING,
   DELETE_CONTACT_SUCCESS,
 } from '../../../constants/actionTypes';
-import axios from '../../../helpers/axiosInstance';
+import axiosInstance from '../../../helpers/axiosInstance';
 
 export default id => dispatch => onSuccess => {
   console.log('id', id);
@@ -11,7 +11,7 @@ export default id => dispatch => onSuccess => {
     type: DELETE_CONTACT_LOADING,
   });
 
-  axios
+  axiosInstance
     .delete(`/contacts/${id}`)
     .then(() => {
       dispatch({

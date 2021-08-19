@@ -3,14 +3,14 @@ import {
   GET_CONTACTS_LOADING,
   GET_CONTACTS_SUCCESS,
 } from '../../../constants/actionTypes';
-import axios from '../../../helpers/axiosInstance';
+import axiosInstance from '../../../helpers/axiosInstance';
 
 export default () => dispatch => {
   dispatch({
     type: GET_CONTACTS_LOADING,
   });
 
-  axios
+  axiosInstance
     .get('/contacts/')
     .then(res => {
       dispatch({

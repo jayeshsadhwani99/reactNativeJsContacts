@@ -22,7 +22,7 @@ export default StyleSheet.create({
     fontSize: 14,
     paddingVertical: 5,
   },
-  flaotingActionButton: {
+  floatingActionButton: {
     backgroundColor: 'red',
     width: 55,
     height: 55,

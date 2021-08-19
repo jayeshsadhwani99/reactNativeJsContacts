@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import envs from '../config/env';
-import {CREATE_CONTACT, LOGOUT} from '../constants/routeNames';
+import {LOGOUT} from '../constants/routeNames';
 import {navigate} from '../navigations/SideMenu/RootNavigator';
 
 let headers = {};
@@ -13,12 +13,10 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   async config => {
-    // navigate(CREATE_CONTACT);
     const token = await AsyncStorage.getItem('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
-
     return config;
   },
   error => {

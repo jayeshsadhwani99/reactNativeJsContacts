@@ -3,7 +3,7 @@ import {
   CREATE_CONTACT_LOADING,
   CREATE_CONTACT_SUCCESS,
 } from '../../../constants/actionTypes';
-import axios from '../../../helpers/axiosInstance';
+import axiosInstance from '../../../helpers/axiosInstance';
 
 export default form => dispatch => onSuccess => {
   const requestPayload = {
@@ -19,7 +19,7 @@ export default form => dispatch => onSuccess => {
     type: CREATE_CONTACT_LOADING,
   });
 
-  axios
+  axiosInstance
     .post('/contacts/', requestPayload)
     .then(res => {
       dispatch({

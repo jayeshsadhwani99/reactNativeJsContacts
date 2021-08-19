@@ -3,7 +3,7 @@ import {
   EDIT_CONTACT_LOADING,
   EDIT_CONTACT_SUCCESS,
 } from '../../../constants/actionTypes';
-import axios from '../../../helpers/axiosInstance';
+import axiosInstance from '../../../helpers/axiosInstance';
 
 export default (form, id) => dispatch => onSuccess => {
   const requestPayload = {
@@ -20,7 +20,7 @@ export default (form, id) => dispatch => onSuccess => {
     type: EDIT_CONTACT_LOADING,
   });
 
-  axios
+  axiosInstance
     .put(`/contacts/${id}`, requestPayload)
     .then(res => {
       dispatch({
